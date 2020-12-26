@@ -3,8 +3,10 @@
     <div class="nav h-full">
       <NavBar></NavBar>
     </div>
-    <div class="content h-full">
-      <router-view></router-view>
+    <div class="content h-full fg-1 shadow">
+      <div class="content-view">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
   <!-- <router-view/> -->
@@ -26,7 +28,7 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
   width: 100%;
   height: 100%
@@ -42,6 +44,16 @@ export default defineComponent({
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+}
+
+.content {
+  padding: 20px 25px;
+  overflow-y: auto;
+  .content-view {
+    background: #fff;
+    min-height: 100%;
+    border-radius: 4px;
   }
 }
 </style>
