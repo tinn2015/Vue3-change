@@ -17,6 +17,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .home {
-  height: 100%
+  height: 100%;
+  padding-top: 100px
 }
 </style>

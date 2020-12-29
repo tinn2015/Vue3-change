@@ -26,7 +26,8 @@
           <template #title>选项4</template>
           <el-menu-item index="1-4-1">选项1</el-menu-item>
         </el-submenu> -->
-        <el-menu-item index="1-1"><router-link :to="{path: '/vue-router'}">选项1</router-link></el-menu-item>
+        <el-menu-item index="1-1"><div @click="routerTo('callApplyBind')">call-apply-bind</div></el-menu-item>
+        <el-menu-item index="1-2"><div @click="routerTo('exercises')">exercises</div></el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template #title>
@@ -34,7 +35,7 @@
           <img class="icon" src="../assets/imgs/vue.png" alt="">
           <span>Vue</span>
         </template>
-        <el-menu-item index="1-1"><div @click="routerTo('vueRouter')">vue-router</div></el-menu-item>
+        <el-menu-item index="2-1"><div @click="routerTo('vueRouter')">vue-router</div></el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
