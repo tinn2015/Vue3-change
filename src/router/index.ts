@@ -26,6 +26,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/js/callApplyBind.vue')
   },
   {
+    path: '/jsNote',
+    name: 'jsNote',
+    component: () => import('../views/js/note.vue')
+  },
+  {
     path: '/vue-router',
     name: 'vueRouter',
     component: () => import('../views/vue/vue-router.vue')

@@ -1,7 +1,9 @@
 <template>
   <pre>
     <code lang="js">
-      <slot></slot>
+      <div>
+        <slot></slot>
+      </div>
     </code>
   </pre>
 </template>

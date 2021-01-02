@@ -28,6 +28,7 @@
         </el-submenu> -->
         <el-menu-item index="1-1"><div @click="routerTo('callApplyBind')">call-apply-bind</div></el-menu-item>
         <el-menu-item index="1-2"><div @click="routerTo('exercises')">exercises</div></el-menu-item>
+        <el-menu-item index="1-3"><div @click="routerTo('jsNote')">Note</div></el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template #title>
