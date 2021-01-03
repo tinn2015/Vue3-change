@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  das
+</body>
+
+<script>
+Function.prototype.myCall = function () {
+	let args = Array.from(arguments)
+	let context = args.shift()
+	let fn = this
+
+	context.fn = fn
+
+	context.fn(...args)
+
+	delete context.fn
+
+}
+
+Function.prototype.myApply = function () {
+	let args = Array.from(arguments)
+	let context = args[0]
+	let fn = this
+
+	context.fn = fn
+
+	context.fn(args[1])
+
+	delete context.fn
+
+}
+
+Function.prototype.myBind = function (context) {
+	// bind 返回一个方法， 改变了this指向
+	let fn = this
+	let args = Array.from(arguments).slice(1)
+
+	function result () {
+		fn.apply(context, args.concat(arguments))
+	}
+
+	result.prototype = Object.create(fn.prototype)
+
+	return result
+}
+
+function myNew () {
+	// 创建一个新对象
+	let o = {}
+	console.log(arguments, 'arguments')
+	//  获取构造函数
+	let _constructor = [].shift.call(arguments)
+
+	//  实例的原型执行构造函数的原型
+	/* 这一步也可以用 Object.create(_constructor.prototype) */
+	o.__proto__ = _constructor.prototype
+
+	// 
+	console.log(arguments, '222')
+	_constructor.apply(o, arguments)
+
+	return o
+}
+
+let person = {
+  name: 'tinn',
+  age: 22,
+}
+
+let say = function (place) {
+  console.log(this.name, place)
+}
+
+say.myCall(person, 'hangzhou')
+say.myApply(person, ['hangzhou'])
+
+let mySay = say.bind(person, ['shanghai'])
+mySay()
+
+//  myNew
+function Person (name) {
+	this.name = name
+}
+
+Person.prototype.area = 'china'
+
+let people = myNew (Person, 'tinn')
+let _people = new Person('tinn')
+
+console.log(people, '实例')
+console.log(_people, '实例')
+
+</script>
+</html>

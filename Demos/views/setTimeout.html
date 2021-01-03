@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button id="btn">按钮</button>
+  </div>
+  <script>
+    // 用setTimeout 来实现setInterval
+    let timer = null
+    function myInterval (fn, delay) {
+      function timeout () {
+        if (timer === 'clear') return
+        timer = setTimeout(() => {
+          fn()
+          timeout()
+        }, delay)
+      }
+      timeout()
+    }
+
+    function clearTimer () {
+      timer = 'clear'
+    }
+
+    myInterval(() => {
+      console.log(timer)
+    }, 1000)
+
+    document.getElementById('btn').onclick = function () {
+      clearTimer()
+    }
+  </script>
+</body>
+</html>

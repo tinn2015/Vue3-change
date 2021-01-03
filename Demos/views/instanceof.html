@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>instanceof</title>
+</head>
+<body>
+  
+  
+  <script>
+    function myInstanceof (a, b) {
+      if (typeof a !== 'object' || b === null) return false
+
+      // getPrototypeOf 返回对象的原型， Object.prototype
+      let proto = Object.getPrototypeOf(a)
+      let prototype = b.prototype
+
+      while (proto) {
+        if (proto === null) {
+          return false
+        }
+
+        if (proto === prototype) {
+          return true
+        }
+
+        // 继续查找原型的原型链
+        proto = proto.__proto__
+      }
+    }
+
+    function A (name) {
+      this.name = name
+    }
+
+    let a = new A('kkk')
+
+    console.log(myInstanceof(a, A))
+
+    
+
+  </script>
+
+  <script>
+    (function(){
+      console.log('IIFE')
+      let i = 0
+      while (i < 100) {
+        console.log(i)
+        if (i === 10) {
+          return false
+        }
+        i++
+      }
+    })()
+  </script>
+</body>
+</html>

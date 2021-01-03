@@ -104,5 +104,45 @@
       // Last line! Promise! Promise! Last line! Timeout! Timeout!
       // setTimeout 是在指定延迟后 将回调添加到 宏任务队列
     </code></pre>
+
+    <div class="a-h3">9. 变量引用关系</div>
+
+    <pre><code>
+      var foo = { n: 1 };
+      (function(foo) {
+        console.log(foo.n);
+        foo.n = 3;
+        foo = { n: 2 };
+        console.log(foo.n);
+      })(foo)
+
+      console.log(foo.n);
+
+    var foo = { n: 1 };
+    (function(foo){            // 形参 foo 同实参 foo 一样指向同一片内存空间，这个空间里的 n 的值为 1
+        var foo;               // 优先级低于形参，无效。
+        console.log(foo.n);    // 输出 1
+        foo.n = 3;             // 形参与实参 foo 指向的内存空间里的 n 的值被改为 3
+        foo = { n: 2 };        // 形参 foo 指向了新的内存空间，里面 n 的值为 2.
+        console.log(foo.n);    // 输出新的内存空间的 n 的值
+    })(foo);
+    console.log(foo.n);        // 实参 foo 的指向还是原来的内存空间，里面的 n 的值为 3.
+
+    </code></pre>
+
+    <div class="a-h3">10. 函数是一等公民</div>
+    <pre><code>
+      // 首先是fun
+      var a = 1;
+      function b() {
+        a = 10;
+        return;
+        // 首先是a的变量提升
+        // 其次在b块级作用域中函数法声明变量a， 此时申明的为块级作用于
+        function a() {}
+      }
+      b();
+      console.log(a); // 1
+    </code></pre>
   </div>
 </template>

@@ -11,6 +11,7 @@
     <div class="a-h2">2. 数组方法及返回</div>
     <ul class="a-list">
       <li>push, unshift  返回数组长度</li>
+      <li>shift, pop 会改变原数组</li>
       <li>slice(start, end)</li>
       <pre><code>
         slice(a, b)截取 开始下标 -> 结束下标， 但是不包括结束下标
@@ -58,6 +59,21 @@
 
     <div class="a-h2">8. Object.seal()</div>
     <p class="a-p">使用 Object.seal 我们可以防止新属性 被添加，或者存在属性 被移除. 然而，你仍然可以对存在属性进行更改。</p>
+
+    <div class="a-h2">9. 判断数据类型：Array.prototype.toString.call</div>
+    <pre><code>
+      Object.prototype.toString.call(num), // [object Number]
+      Object.prototype.toString.call(str), // [object String]
+      Object.prototype.toString.call(bool), // [object Boolean]
+      Object.prototype.toString.call(arr), // [object Array]
+      Object.prototype.toString.call(json), // [object Object]
+      Object.prototype.toString.call(func), // [object Function]
+      Object.prototype.toString.call(und), // [object Undefined]
+      Object.prototype.toString.call(nul), // [object Null]
+      Object.prototype.toString.call(date), // [object Date]
+      Object.prototype.toString.call(reg), // [object RegExp]
+      Object.prototype.toString.call(error), // [object Error]
+    </code></pre>
 
   </div>
 </template>
