@@ -2,7 +2,7 @@
   <div class="wh-full">
     <el-menu
       :uniqueOpened="false"
-      default-active="2"
+      :default-openeds="['1']"
       class="el-menu-vertical-demo h-full"
       @open="handleOpen"
       @close="handleClose"
@@ -26,9 +26,9 @@
           <template #title>选项4</template>
           <el-menu-item index="1-4-1">选项1</el-menu-item>
         </el-submenu> -->
-        <el-menu-item index="1-1"><div @click="routerTo('callApplyBind')">call-apply-bind</div></el-menu-item>
+        <el-menu-item index="1-1"><div @click="routerTo('jsNote')">Note</div></el-menu-item>
         <el-menu-item index="1-2"><div @click="routerTo('exercises')">exercises</div></el-menu-item>
-        <el-menu-item index="1-3"><div @click="routerTo('jsNote')">Note</div></el-menu-item>
+        <el-menu-item index="1-3"><div @click="routerTo('callApplyBind')">call-apply-bind</div></el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template #title>
@@ -37,6 +37,16 @@
           <span>Vue</span>
         </template>
         <el-menu-item index="2-1"><div @click="routerTo('vueRouter')">vue-router</div></el-menu-item>
+        <el-menu-item index="2-1"><div @click="routerTo('nextTick')">Vue.nextTick</div></el-menu-item>
+      </el-submenu>
+      <el-submenu index="3">
+        <template #title>
+          <!-- <i class="el-icon-location"></i> -->
+          <img class="icon" src="../assets/imgs/performance.png" alt="">
+          <span>性能优化</span>
+        </template>
+        <el-menu-item index="3-1"><div @click="routerTo('performance')">总结</div></el-menu-item>
+        <el-menu-item index="3-2"><div @click="routerTo('treeShaking')">tree shaking</div></el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

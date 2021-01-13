@@ -1,6 +1,7 @@
 <template>
   <div class="article-area">
     <div class="a-title">重点笔记</div>
+    <div class="h2"><a href="https://juejin.cn/post/6914831351271292936?utm_source=gold_browser_extension" target="_blank">js基础</a></div>
     <div>
       <p class="a-h2">1. 箭头函数没有原型对象</p>
       <pre><code>
@@ -75,5 +76,44 @@
       Object.prototype.toString.call(error), // [object Error]
     </code></pre>
 
+    <div class="a-h2">10. Event Loop执行顺序</div>
+    <p class="a-p">所有同步任务都在主线程上执行， 形成一个执行栈， 主线程之外会有一个任务队列。</p>
+    <ul class="a-list2">
+      <li>一开始整个脚本 script 作为一个宏任务执行</li>
+      <li>执行过程中，同步代码 直接执行，宏任务 进入宏任务队列，微任务 进入微任务队列。</li>
+      <li>当前宏任务执行完出队，检查微任务列表，有则依次执行，直到全部执行完毕。</li>
+      <li>执行浏览器 UI 线程的渲染工作。（window.resize, requestAnimationFrame）</li>
+      <li>检查是否有 Web Worker 任务，有则执行。</li>
+      <li>执行完本轮的宏任务，回到步骤 2，依次循环，直到宏任务和微任务队列为空。</li>
+    </ul>
+
+    <div class="a-h2">11. css 权重</div>
+    <p class="a-p a-ft-w">!important > 内联样式(1000) > id(100) > class(10) > 元素(1)</p>
+    <ul class="a-list">
+      <li>1. 根据权重计算</li>
+      <li>2. 权重相同则后声明的优先</li>
+    </ul>
+
+    <div class="a-h2">12. == 与 ===</div>
+    <div class="a-h3">===</div>
+    <ul class="a-list">
+      <li>类型且值相等则相等</li>
+    </ul>
+    <div class="a-h3">==</div>
+    <ul class="a-list">
+      <li>类型相同， 进行===比较</li>
+      <li>类型不同则转换类型再比较</li>
+    </ul>
+    <pre><code>
+      1. undefined === null  // false
+      2. undefined == null   // true
+      3. '12' == 12     // true 字符串转为数字再进行比较
+      4. 1 == true    // true   Boolean 跟数字进行比较， true -> 1, false -> 0
+      5. [1,2] == '12' // false   引用类型跟字符换进行比较时 引用类型转为字符串(toString()) 再比较
+      6. [1] == 1   // false   引用类型跟数字进行比较时 引用类型先转为字符串再转为数字再进行比较
+      7. {a: 1} == true // false  引用类型跟Boolean进行比较， 引用类型先转为字符串再转为数字， Boolean直接转为数字
+      8. NaN == NaN // false
+      9. NaN === NaN // false  判断NaN的唯一方法是isNaN()
+    </code></pre>
   </div>
 </template>

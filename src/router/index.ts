@@ -31,9 +31,24 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/js/note.vue')
   },
   {
+    path: '/performance',
+    name: 'performance',
+    component: () => import('../views/performance/index.vue')
+  },
+  {
+    path: '/treeShaking',
+    name: 'treeShaking',
+    component: () => import('../views/performance/treeShaking.vue')
+  },
+  {
     path: '/vue-router',
     name: 'vueRouter',
     component: () => import('../views/vue/vue-router.vue')
+  },
+  {
+    path: '/nextTick',
+    name: 'nextTick',
+    component: () => import('../views/vue/nextTick.vue')
   }
 ]
 
