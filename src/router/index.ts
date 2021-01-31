@@ -49,6 +49,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/nextTick',
     name: 'nextTick',
     component: () => import('../views/vue/nextTick.vue')
+  },
+  {
+    path: '/watchComputed',
+    name: 'watchComputed',
+    component: () => import('../views/vue/watch-computed.vue')
   }
 ]
 

@@ -29,6 +29,8 @@
       但目前浏览器对 ES6 Module 兼容还不太好，我们平时在 Webpack 中使用的 export 和 import，会经过 Babel 转换为 CommonJS 规范。
     </p>
 
+    <p class="a-p a-c-red">CommonJS规范规定，每一个JS文件就是一个模块，有自己的作用域；在一个模块中定义的变量、函数等都是私有变量，对其他文件不可见。每个模块内部都有一个module变量，代表当前模块；这个变量是一个对象，它的exports属性（即module.exports）提供对外导出模块的接口。</p>
+
     <ul class="a-list2">
       <li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
       <li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</li>

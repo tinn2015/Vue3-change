@@ -38,6 +38,7 @@
         </template>
         <el-menu-item index="2-1"><div @click="routerTo('vueRouter')">vue-router</div></el-menu-item>
         <el-menu-item index="2-1"><div @click="routerTo('nextTick')">Vue.nextTick</div></el-menu-item>
+        <el-menu-item index="2-1"><div @click="routerTo('watchComputed')">Watch&Computed</div></el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template #title>

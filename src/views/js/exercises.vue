@@ -144,5 +144,97 @@
       b();
       console.log(a); // 1
     </code></pre>
+
+    <div class="a-h3">11. Promise</div>
+    <p class="a-p a-c-red">不能返回 promise 本身，会造成死循环</p>
+    <pre><code>
+      const promise = new Promise((resolve, reject) => {
+        resolve('success1');  // resolve后Promise状态改为resolved, 后面改变Promise状态的将不会执行
+        reject('error');
+        console.log(2);      // 其他代码仍旧执行
+        resolve('success2');
+      });
+
+      promise.then((res) => {
+        console.log('then1: ', res);
+        return '33'  // return 会被包装成resolve
+      }).then((res) => {
+        console.log('then2: ', res);
+      }).catch((error) => {
+        console.log('catch: ', error);
+      });
+
+      Promise
+      .resolve(1)
+      .then(2)
+      .then(Promise.resolve(3))
+      .then(console.log);
+
+      /**
+        执行顺序和分析：
+        顺序：
+          * 1
+        分析：
+          1. .then 和 .catch 的参数希望是函数，传入非函数会发生值透传
+          2. 值透传导致第 1 个 then 和第 2 个 then 传入的都不是函数，导致它传到最后的 1 个 then 里面
+      */
+
+      Promise
+      .reject('err')  // reject 优先进入then的第二个参数，没有第二个参数则进入catch
+      .then((res) => {
+        console.log('success: ', res);
+      }, (err) => {
+        console.log('error: ', err);
+      }).catch((err) => {
+        console.log('catch: ', err);
+      })
+
+    </code></pre>
+    <div class="a-h2">async/await</div>
+    <ul class="a-list">
+      <li>遇见await直接执行里面的内容</li>
+      <li>await后面的任务加入到微任务</li>
+      <li>async 函数中抛出了错误，则终止错误结果，不会继续向下执行。throw new Error 也是如此</li>
+    </ul>
+    <pre><code>
+      // 题目1
+      async function async1() {
+        console.log(1);
+        await async2();
+        console.log(2);
+      }
+
+      async function async2() {
+        console.log(3);
+      }
+
+      async1();
+
+      console.log(4);
+      // 1
+      // 3
+      // 4
+      // 2
+
+      // 题目2
+      async function async1() {
+        await async2();
+        console.log('async1');
+        return 'async1 success';
+      }
+
+      async function async2() {
+        return new Promise((resolve, reject) => {
+          console.log('async2');
+          reject('error');
+        })
+      }
+
+      async1().then((res) => {
+        console.log('res: ', res);
+      })
+      // 'async2'
+      //  'Promise' rejected: "error"
+    </code></pre>
   </div>
 </template>

@@ -115,5 +115,22 @@
       8. NaN == NaN // false
       9. NaN === NaN // false  判断NaN的唯一方法是isNaN()
     </code></pre>
+
+    <div class="a-h2">13. typeof</div>
+    <p class="a-p">
+      typeof可以识别出基本类型boolean,number,undefined,string,symbol，但是不能识别null。不能识别引用数据类型，会把null、array、object统一归为object类型,但是可以识别出function。
+      所以typeof可以用来识别一些基本类型。
+    </p>
+    <pre><code>
+      console.log(typeof bool); //boolean
+      console.log(typeof num);//number
+      console.log(typeof str);//string
+      console.log(typeof und);//undefined
+      console.log(typeof nul);//object
+      console.log(typeof arr);//object
+      console.log(typeof obj);//object
+      console.log(typeof fun);//function
+      console.log(typeof s1); //symbol
+    </code></pre>
   </div>
 </template>
