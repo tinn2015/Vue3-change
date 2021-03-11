@@ -132,5 +132,16 @@
       console.log(typeof fun);//function
       console.log(typeof s1); //symbol
     </code></pre>
+
+    <div class="a-h2">14. ++</div>
+    <p class="a-p">后置时先返回后增加， 前置时先增加再返回</p>
+    <pre><code>
+      let number = 0;
+      console.log(number++);
+      console.log(++number);
+      console.log(number);
+
+      // 0 2 2
+    </code></pre>
   </div>
 </template>
