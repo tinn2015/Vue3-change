@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var arr = [1,[2,[3,[4, null]]]]  //输出[4,[3,[2,[1, null]]]]
+    function handle (arr) {
+      let nums = []
+      function getNums (_arr) {
+        if (_arr[1] === null) {
+          nums.push(_arr[0])  // 当时这里没有push
+          return 
+        } else {
+          nums.push(_arr[0]) 
+          getNums(_arr[1])
+        }
+      }
+      getNums(arr)  // 当时这里写成了_arr, 有点紧张
+      let result = []
+      nums.forEach((i, index)=> {
+        if (index === 0) {
+          result=[i, null]
+        } else {
+          result = [i, result]
+        }
+      })
+      return result
+    }
+
+    handle(arr)
+  </script>
+</body>
+</html>

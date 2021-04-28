@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .red {
+      color: red
+    }
+    #box {
+      color: blueviolet
+    }
+    span {
+      color: yellowgreen
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span class="red" id="box">flex</span>
+    
+  </div>
+  <div style="width: 20%; height: 20vw; background: red"></div>
+  <div style="width: 20%; padding-top: 20%; background: greenyellow"></div>
+
+  <script>
+    class Father {
+      constructor (name) {
+        this.name = name
+      }
+      say () {
+        console.log(this.name)
+      }
+    }
+
+    class Son extends Father {
+      constructor(name) {
+        super(name)
+      }
+    }
+
+    let son = new Son('ben')
+    son.say()
+
+    function formatterNum (number) {
+      let num = number.toString()
+      let numArr = [...num]
+      if (numArr.length <= 3) {return number}
+      let maxSplit = Math.floor(numArr.length / 3)
+      let topIndex = numArr.length % 3
+      let tempArr = []
+      let splitIndex = 0
+      if (topIndex) {
+        tempArr.push(numArr.splice(0, topIndex).join(''))
+      }
+      for (let i = 0; i < maxSplit; i ++) {
+        let block = numArr.splice(0, 3)
+        tempArr.push(block.join(''))
+      }
+      console.log(tempArr)
+      return tempArr.join(',')
+    }
+
+    let times = {};let t = window.performance.timing;// 优先使用 navigation v2 
+    https://www.w3.org/TR/navigation-timing-2/
+    if (typeof win.PerformanceNavigationTiming === 'function') { try { var nt2Timing = performance.getEntriesByType('navigation')[0] if (nt2Timing) { t = nt2Timing } } catch (err) { }}//重定向时间times.redirectTime = t.redirectEnd - t.redirectStart;//dns查询耗时times.dnsTime = t.domainLookupEnd - t.domainLookupStart;//TTFB 读取页面第一个字节的时间times.ttfbTime = t.responseStart - t.navigationStart;//DNS 缓存时间times.appcacheTime = t.domainLookupStart - t.fetchStart;//卸载页面的时间times.unloadTime = t.unloadEventEnd - t.unloadEventStart;//tcp连接耗时times.tcpTime = t.connectEnd - t.connectStart;//request请求耗时times.reqTime = t.responseEnd - t.responseStart;//解析dom树耗时times.analysisTime = t.domComplete - t.domInteractive;//白屏时间 times.blankTime = (t.domInteractive || t.domLoading) - t.fetchStart;//domReadyTimetimes.domReadyTime = t.domContentLoadedEventEnd - t.fetchStart;
+    
+
+    class Single {
+      constructor(name) {
+        this.name = name
+      }
+
+      static getInstance (name) {
+        if (!Single.instance) {
+          Single.instance = new Single(name)
+        }
+        return Single.instance
+      }
+    }
+
+    function eventLoop () {
+      setTimeout(() => {
+        new Promise((resolve, reject) => {
+          resolve(22)
+        }).then((res) => {
+          console.log(res)
+        })
+      })
+      new Promise((resolve, reject) => {
+        resolve(11)
+      }).then((res) => {
+        console.log(res)
+      })
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Function.prototype.myCall = function () {
+      let args = Array.from(arguments)
+      let fn = this
+      let context = args.splice(0,1)[0]
+      context.fn = fn
+
+      context.fn(...args)
+
+      delete context.fn
+    }
+
+    Function.prototype.myApply = function () {
+      let args = Array.from(arguments)
+      let fn = this
+      let context = args[0]
+      context.fn = fn
+      context.fn(args[1])
+
+      delete context.fn
+    }
+
+    Function.prototype.myBind = function () {
+      let args = Array.from(arguments)
+      let fn = this
+      let target = args.splice(0, 1)[0]
+      let result = function () {
+        fn.myCall(target, ...args)
+      }
+
+      return result
+    }
+
+    function myInstanceOf (a, b) {
+      let result = false
+      let proto = Object.getPrototypeOf(a)
+      let prototype = b.prototype
+      while (proto) {
+        if (proto === null) {
+          return false
+        }
+        if (proto === prototype) {
+          return true
+        }
+        proto = proto.__proto__
+      }
+    }
+
+    var obj = {
+      name: 'tinn'
+    }
+
+    function say (type, age) {
+      console.log(this.name, type, age)
+    }
+
+    say.myCall(obj, 'boy', 32)
+    say.myApply(obj, ['boy', 32])
+
+    var res = say.bind(obj, 'boy', 32)
+    console.log(res)
+    res()
+
+    function AA (name) {
+      this.name = name
+    }
+
+    // let aa = new AA('tinn')
+    let aa = {}
+    let flag = myInstanceOf(aa, AA)
+    console.log(flag)
+  </script>
+</body>
+</html>

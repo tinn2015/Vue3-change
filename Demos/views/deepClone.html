@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>深拷贝</title>
+</head>
+<body>
+  
+  <script>
+    function deepClone (target) {
+      let result = null
+      if (typeof target === 'object') {
+        if (Array.isArray(target)) {
+          result = []
+          target.forEach(i => {
+            result.push(deepClone(i))
+          })
+        } else if (target === null) {
+          result = null
+        } else if (target.constructor === Object) {
+          result = {}
+          for (let key in target) {
+            result[key] = deepClone(target[key])
+          }
+        }
+      } else {
+        result = target
+      }
+      return result
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>curry</title>
+</head>
+<body>
+  dadsd
+  <script>
+    function add (m) {
+      let sum = m
+      let result = function (n) {
+        sum = n + m
+        return add(sum)
+      }
+      result.toString = function () {
+        return m
+      }
+      return result
+    }
+
+    function add2 (m) {
+      let result = function (n) {
+        return add2(m + n)
+      }
+      result.toString = function () {
+        return m
+      }
+
+      return result
+    }
+    var result = add2(1)(2)(3)
+    console.log(result)
+  </script>
+</body>
+</html>

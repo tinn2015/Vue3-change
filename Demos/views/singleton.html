@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单例模式</title>
+</head>
+<body>
+  <script>
+    var single = (function () {
+      let instance = null
+
+    })()
+
+    class Single2 {
+      constructor (name) {
+        this.name = ''
+      }
+      say () {
+        console.log(this, this.name)
+      }
+
+      static getInstance (name) {
+        if (!this.instance) {
+          this.instance = new Single2(name)
+        }
+        return this.instance
+      } 
+    }
+  </script>
+</body>
+</html>

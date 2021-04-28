@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件捕获/冒泡</title>
+</head>
+<body>
+  <ul>
+    <li>DOM1级: 在dom 上onclick</li>
+    <li>DOM2级：通过addEventListener事件监听</li>
+    <li>DOM3级：通过获取元素绑定document.getElementById('id').click</li>
+  </ul>
+
+  <div id="box">
+    <p id="target">你好</p>
+  </div>
+
+  <script>
+    let box = document.getElementById('box')
+    let target = document.getElementById('target')
+
+    target.addEventListener('click', function () {
+      console.log('target 捕获')
+    }, true)
+    target.addEventListener('click', function () {
+      console.log('target 冒泡')
+    }, false)
+
+    box.addEventListener('click', function () {
+      console.log('box 捕获')
+    }, true)
+
+    box.addEventListener('click', function () {
+      console.log('box 冒泡')
+    }, false)
+  </script>
+</body>
+</html>

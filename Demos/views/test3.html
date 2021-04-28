@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试题</title>
+</head>
+<body>
+  <script>
+    // add(1)(2,3)(4)
+
+    function add (x) {
+      let sum = x
+      let fn = function () {
+        let nums = Array.from(arguments)
+        let y = nums.reduce((pre, cur) => {
+          return pre + cur
+        }, 0)
+        sum += y
+        console.log(sum)
+        return fn
+      }
+      return fn
+    }
+    add(1)(2,3)(4)
+  </script>
+</body>
+</html>

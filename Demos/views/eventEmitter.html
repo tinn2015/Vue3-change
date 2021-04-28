@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  
+  .red {
+    color: red
+  }
+  .green {
+    color: green
+  }
+  
+</style>
+<body>
+  eventEmitter
+
+  <div onclick="on1()" class="green red">订阅topic1</div>
+  <div onclick="on2()">订阅topic1</div>
+  <div>订阅topic2</div>
+  <div onclick="fire1()">发布topic1</div>
+  <div>发布topic2</div>
+  <div onclick="off1()">取消订阅topic1</div>
+  <script>
+    class EventEmitter {
+      constructor () {
+        this.subs = {}
+      }
+      $fire (topic, payload) {
+        let fns = this.subs[topic]
+        if (!fns.length) {
+          console.warn('no tipic', topic)
+          return
+        }
+        fns.forEach(fn => {
+          fn(payload)
+        });
+      }
+      $on (topic, fn) {
+        if (!this.subs[topic]) {
+          this.subs[topic] = [fn]
+        } else {
+          this.subs[topic].push(fn)
+        }
+        console.log(this.subs)
+      }
+      $off (topic, fn) {
+        let fns = this.subs[topic]
+        if (!fns) {
+          console.warn('no topic', topic)
+          return
+        }
+        let index = fns.findIndex((i) => {
+          return i == fn
+        })
+        fns.splice(index, 1)
+        console.log(this.subs)
+      }
+    }
+
+    let eventEmitter = new EventEmitter()
+    function on1 () {
+      eventEmitter.$on('topic1', (data) => {
+        console.log('topic1', '1111', data)
+      })
+    }
+
+    function on2 () {
+      eventEmitter.$on('topic1', (data) => {
+        console.log('topic1', '2222', data)
+      })
+    }
+
+    function off1 () {
+      eventEmitter.$off('topic1', (data) => {
+        console.log('topic1', '2222', data)
+      })
+    }
+
+    function fire1 () {
+      eventEmitter.$fire('topic1', {name: 'tinn'})
+    }
+
+  </script>
+</body>
+</html>

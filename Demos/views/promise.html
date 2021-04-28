@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise</title>
+</head>
+<body>
+  <script>
+    class MyPromise {
+      constructor (fn) {
+        this.resolved = []
+        this.rejected = []
+
+        let resolveFn = (res) => {
+          this.resolved.forEach(item => {
+            item(res)
+          })
+        }
+
+        let rejectFn = (err) => {
+          this.rejected.forEach(item => {
+            item(err)
+          })
+        }
+
+        fn(resolveFn, rejectFn)
+      }
+
+      then (resolveFn, rejectFn) {
+        return new MyPromise((resolve, reject) => {
+          let _resolveFn = (value) => {
+            let x = resolveFn(value)
+            resolve(x)
+          }
+          resolveFn && this.resolved.push(_resolveFn)
+          rejectFn && this.rejected.push(resolveFn)
+        }) 
+      }
+
+      static all (promiseList) {
+        let result = []
+        let sum = 0
+        return new Promise((resolve, reject) => {
+          promiseList.forEach(p => {
+            Promise.resolve(p).then((res, i) => {
+              result[i] = res
+              sum++
+              if (sum === promiseList.length) {
+                resolve(result)
+              }
+            }, err => {
+              reject(err)
+            })
+          })
+        })
+      }
+      static race (promiseList) {
+        let result = []
+        return new Promise((resolve, reject) => {
+          promiseList.forEach(p => {
+            Promise.resolve(p).then(res => {
+              resolve(res)
+            })
+          }, err => {
+            reject(err)
+          })
+        })
+      }
+    }
+  </script>
+</body>
+</html>
