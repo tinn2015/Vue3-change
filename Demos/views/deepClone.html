@@ -8,26 +8,58 @@
 <body>
   
   <script>
-    function deepClone (target) {
-      let result = null
-      if (typeof target === 'object') {
-        if (Array.isArray(target)) {
-          result = []
-          target.forEach(i => {
-            result.push(deepClone(i))
-          })
-        } else if (target === null) {
-          result = null
-        } else if (target.constructor === Object) {
-          result = {}
-          for (let key in target) {
-            result[key] = deepClone(target[key])
-          }
+    function deepClone (obj) {
+      let visitedObjs = {}
+      function baseClone(target) {
+        debugger
+        let result = null
+        if(!isObject(target)) return result = target
+        result = Array.isArray(target) ? [] : {}
+        if (visitedObjs[target]) {
+          return visitedObjs[target]
         }
-      } else {
-        result = target
+        visitedObjs[target] = result
+        if (typeof target === 'object') {
+          if (Array.isArray(target)) {
+            target.forEach(i => {
+              result.push(baseClone(i))
+            })
+          }else if (Object.prototype.toString.call(target) === '[object Object]') {
+            for (let key in target) {
+              result[key] = baseClone(target[key])
+            }
+          }
+        } else {
+          result = target
+        }
+        return result
       }
-      return result
+      return baseClone(obj)
+    }
+
+    function cloneDeep(obj) {
+      let vistedMap = new Map();
+      function baseClone(target) {
+        
+        if(!isObject(target)) return target
+
+        if(vistedMap.get(target)) return vistedMap.get(target)
+
+        let result = Array.isArray(target) ? [] : {}
+
+        
+        vistedMap.set(target, result)
+        const keys = Object.keys(target);
+        for(let i = 0, len = keys.length; i < len; i++) {
+          result[keys[i]] = baseClone(target[keys[i]])
+        }
+        return result
+      }
+      return baseClone(obj)
+    }
+
+    function isObject(obj) {
+      return obj !== null && typeof obj === 'object'
     }
   </script>
 </body>
